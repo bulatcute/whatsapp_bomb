@@ -13,7 +13,7 @@ Preferably, you can download whatsapp_bomb by cloning the Git repository:
 
 ```git clone https://github.com/bulatcute/whatsapp_bomb.git```
 
-whatsapp_bomb works out of the box with Python version 2.6, 2.7 and 3.x on any platform.
+whatsapp_bomb works out of the box with Python version 3.x on any platform.
 
 
 
