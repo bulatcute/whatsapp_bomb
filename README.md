@@ -21,7 +21,7 @@ whatsapp_bomb works out of the box with Python version 3.x on any platform.
 
 1. Python 3.x
 2. Chrome browser
-3. [ChromeWebDriver](http://chromedriver.chromium.org/downloads) (don't forget to add it to your)
+3. [ChromeWebDriver](http://chromedriver.chromium.org/downloads) (don't forget to add it to your path)
 4. Selenium library
 ```
 $ pip install selenium
