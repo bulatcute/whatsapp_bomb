@@ -135,3 +135,6 @@ dmypy.json
 
 # vscode folder
 .vscode/
+
+# chromedriver
+chromedriver.exe
