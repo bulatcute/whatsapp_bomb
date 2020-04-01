@@ -27,7 +27,7 @@ whatsapp_bomb works out of the box with Python version 3.x on any platform.
 $ pip install selenium
 ```
 
-## How to setup
+## How to use
 
 1. Run script
 ```sh
