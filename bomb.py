@@ -32,7 +32,7 @@ def bomb():
     while True:
         try:
             search = driver.find_element_by_xpath(
-                "/html[1]/body[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/label[1]/input[1]"
+                '//*[@id="side"]/div[1]/div/label/div/div[2]'
             )
             print("search box found")
             break
