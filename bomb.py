@@ -14,57 +14,110 @@ def bomb():
             search = driver.find_element_by_xpath(
                 '//*[@id="side"]/div[1]/div/label/div/div[2]'
             )
-            print("search box found", end='\r')
+            print("search box found")
             break
         except Exception:
-            print("search box not found")
+            print("search box not found", end='\r')
     search.clear()
+    total = 0
 
     for _ in range(count//20 + 1):
         for i in range(cofg + 1):
             if i == 0:
                 trg = target
             else:
-                trg = f'{i}_{target}_{S_ID}'
+                trg = f'{S_ID}_{i}_{target}'
             search.send_keys(trg)
-            k = 0
-            while True:
-                try:
-                    if k == 15:
-                        break
-                    user = driver.find_element_by_xpath(
-                        '//span[@title = "{}"]'.format(trg)
-                    )
-                    k += 1
-                    user.click()
-                    break
-                except:
-                    continue
-            time.sleep(2)
-            msg_box = driver.find_element_by_xpath(
-                "/html[1]/body[1]/div[1]/div[1]/div[1]/div[4]/div[1]/footer[1]/div[1]/div[2]/div[1]/div[2]"
-            )
+            search.send_keys(Keys.ENTER)
+
+            time.sleep(1)
 
             for k in range(20):
-                msg_box.send_keys(message.replace("\n", Keys.SHIFT + Keys.ENTER))
-                msg_box.send_keys(Keys.ENTER)
+                driver.find_element_by_xpath(
+                    '//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys(message)
+                driver.find_element_by_xpath(
+                    '//*[@id="main"]/footer/div[1]/div[3]/button').click()
                 print(f"sent {k + 1} messages", end="\r")
-    
+                total += 1
+
+            print('total sent', total, 'messages')
+
 
 def create_group():
     for i in range(cofg):
         while True:
             try:
-                driver.find_element_by_xpath('//*[@id="side"]/header/div[2]/div/span/div[3]/div').click()
-                driver.find_element_by_xpath('//*[@id="side"]/header/div[2]/div/span/div[3]/span/div/ul/li[1]/div').click()
-                driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div/div[1]/div/div/input').send_keys(target)
-                driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div/div[1]/div/div/input').send_keys(Keys.ENTER)
-                driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div/span/div/span').click()
-                driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div/div[2]/div/div[2]/div/div[2]').send_keys(f'{i + 1}_{target}_{S_ID}')
-                driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div/span/div/div/span').click()
+                driver.find_element_by_xpath(
+                    '//*[@id="side"]/header/div[2]/div/span/div[3]/div').click()
+            except:
+                continue
+            try:
+                driver.find_element_by_xpath(
+                    '//*[@id="side"]/header/div[2]/div/span/div[3]/span/div/ul/li[1]/div').click()
+            except:
+                continue
+            try:
+                driver.find_element_by_xpath(
+                    '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div/div[1]/div/div/input').send_keys(target)
+            except:
+                continue
+            try:
+                driver.find_element_by_xpath(
+                    '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div/div[1]/div/div/input').send_keys(Keys.ENTER)
+            except:
+                continue
+            try:
+                driver.find_element_by_xpath(
+                    '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div/span/div/span').click()
+            except:
+                continue
+            try:
+                driver.find_element_by_xpath(
+                    '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div/div[2]/div/div[2]/div/div[2]').send_keys(f'{S_ID}_{i+1}_{target}')
+            except:
+                continue
+            try:
+                driver.find_element_by_xpath(
+                    '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div/span/div/div/span').click()
+                print('created', f'{S_ID}_{i+1}_{target}', 'group')
                 break
             except:
                 continue
+
+
+def leave_group():
+    while True:
+        try:
+            search = driver.find_element_by_xpath(
+                '//*[@id="side"]/div[1]/div/label/div/div[2]'
+            )
+            print("search box found")
+            break
+        except Exception:
+            print("search box not found", end='\r')
+    search.clear()
+
+    for i in range(1, cofg + 1):
+        search.send_keys(f'{S_ID}_{i}_{target}')
+        search.send_keys(Keys.ENTER)
+        driver.find_element_by_xpath(
+            '//*[@id="main"]/header/div[3]/div/div[3]/div').click()
+        time.sleep(0.3)
+        driver.find_element_by_xpath(
+            '//*[@id="main"]/header/div[3]/div/div[3]/span/div/ul/li[5]/div').click()
+        time.sleep(0.3)
+        driver.find_element_by_xpath(
+            '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[2]/div[2]').click()
+        time.sleep(0.5)
+        driver.find_element_by_xpath(
+            '//*[@id="main"]/header/div[3]/div/div[3]/div').click()
+        time.sleep(0.3)
+        driver.find_element_by_xpath(
+            '//*[@id="main"]/header/div[3]/div/div[2]/span/div/ul/li[4]/div').click()
+        time.sleep(0.3)
+        driver.find_element_by_xpath(
+            '//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[2]/div[2]').click()
+        print('deleted', f'{S_ID}_{i+1}_{target}', 'group')
 
 
 if __name__ == "__main__":
@@ -93,14 +146,18 @@ if __name__ == "__main__":
     if message == "":
         print('message exc')
         exit(0)
-    
-    driver = webdriver.Edge('D:/Projects/msedgedriver.exe') # path to the chromedriver
+
+    # path to the chromedriver
+    driver = webdriver.Edge('D:/Projects/msedgedriver.exe')
     driver.maximize_window()
     driver.get("https://web.whatsapp.com")
 
     create_group()
     bomb()
-    
+    print('DO NOT CLOSE THE TAB')
+    time.sleep(20)
+    leave_group()
+
     time.sleep(2)
     driver.quit()
     print('bombed succesfully')
